@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% load static %}
+    <div class="section">
+        <div class="container"></div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Fale Conosco</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="text-muted">Você pode entrar em contato conosto pelas rede sociais ou pelo email abaixo:</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-xs-3 col-md-offset-2 text-center">
+               <img src="{% static 'img/email.png' %}" class="img-contato img-responsive">
+                     <div class="page-header text-center">
+                        <h4>Email:&nbsp;
+                            <small>viniciuslopeslps@gmail.com</small>
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-md-offset-2 text-center">
+                    <a href="https://github.com/lopesvinicius"><img src="{% static 'img/github.png' %}" class="img-contato img-responsive"></a>
+                    <div class="page-header text-center">
+                        <h4>Desenvolvedor:&nbsp;
+                            <small>https://github.com/lopesvinicius</small>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

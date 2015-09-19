@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3 class="text-muted">LISTAGEM DE CURSOS&nbsp;</h3>
+                                </div>
+                            </div>
+
+                            {% for course in courses %}    
+                            <div class="row">
+                                <div class="col-md-4">
+                                <a href="{{ course.get_absolute_url }}">
+                                {% if course.image %}
+                                    <img src="{{ course.image.url }}"
+                                    class="img-responsive">
+                                {% else %}
+                                <img src="{% static 'img/course-image.png' %}"
+                                    class="img-responsive">
+                                {% endif%}
+                                </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <h2><a style="color:black" href="{{ course.get_absolute_url }}">{{ course.name }}</a>
+                                    </h2>
+                                    <p class="text-muted">
+                                    {{ course.description|linebreaks}}</p>
+                                </div>
+                            </div>
+                            <div class="section">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3 class="text-muted">Nenhum curso disnonível</h3>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ {% endblock %}
+
+
+
+
+

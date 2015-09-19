@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 contenteditable="true">Informe seus dados</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <form action="#contato" class="form-horizontal" role="form" method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                {{ field.label_tag }}
+                            </div>
+                            <div class="col-sm-9">
+                            {{ field }}
+                            </div>
+                        </div>
+                    {{ field.errors }}
+                    {% endfor %}
+                    <button type="submit" value=" Send" class="btn btn-primary">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

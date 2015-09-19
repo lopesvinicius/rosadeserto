@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>{{ course }}</h2>
+                    {{ course.description }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3 class="text-muted">Sobre o Curso</h3>
+                    {{ course.about|linebreaks }}
+                    <a href="{% url 'courses:enrollment' course.slug %}">
+                        <button type="button" class="btn btn-success">Inscreva-se</button>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                {% if course.image %}
+                    <img src="{{ course.image.url }}"
+                    class="img-responsive">
+                {% else %}
+                <img src="{% static 'img/course-image.png' %}"
+                    class="img-responsive">
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h3>Duvidas sobre o curso? &nbsp;
+                            <font color="#777777">
+                                <span style="font-size: 23.3999996185303px; line-height: 23.3999996185303px;">Fale conosco!</span>
+                            </font>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                {% if is_valid %}
+                <div class="alert alert-success" role="alert"><a href="" style="color: rgb(1, 89, 69)"> Enviado com sucesso!</a></div>
+                {% endif %}
+                    <form action="#contato" class="form-horizontal" role="form" method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <div class="col-sm-2">
+                                {{ field.label_tag }}
+                            </div>
+                            <div class="col-sm-10">
+                            {{ field }}
+                            </div>
+                        </div>
+                    {{ field.errors }}
+                    {% endfor %}
+                    <button type="submit" value=" Send" class="btn btn-primary">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+ {% endblock %}

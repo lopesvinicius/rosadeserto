@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% load courses_tags %}
+
+{% block content %}      
+{% load_my_courses user as enrollments%}
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                        <h2>Meu painel</h2>
+                </div>
+            </div>
+             <ul class="breadcrumb">
+                {% block breadcrumb %}
+                <li><a href="{% url 'accounts:dashboard' %}">Meu painel</a></li>
+                {% endblock %}            
+            </ul>
+        </div>
+    </div>
+            <div class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <ul class="list-group">
+                            
+                            <li class="list-group-item">
+                                <b>Bem vindo, {{ user }}</b>
+                            </li>
+                            {% block menu_options %} 
+
+                            
+                            <li class="list-group-item">
+                                    <b>MEUS CURSOS</b>
+                            </li>
+                            {% for enrollment in enrollments %}
+                            <li class="list-group-item">
+                                <a href="{% url 'courses:announcements' enrollment.course.slug %}" class="link">
+                                <i class="fa fa-book"></i>
+                                {{ enrollment.course }}
+                                </a>
+                            </li>
+
+                            {% empty %}
+                            <li class="list-group-item">Nenhum curso encontrado</li>
+                                {% endfor %}
+                                <li class="list-group-item">
+                                    <b>MINHA CONTA</b>
+                                </li>
+                                
+                                <li class="list-group-item">
+                                    <a href="{% url 'accounts:edit' %}" class="link">
+                                    <i class="fa fa-cog"></i>
+                                    Editar Informações
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="{% url 'accounts:edit_password' %}" class="link">
+                                    <i class="fa fa-lock"></i>
+                                    Editar senha
+                                    </a>
+                                </li>
+                            {% endblock %}
+                            </ul>
+                        </div>
+                        <div class="col-md-8">
+                            
+                            {% block dashboard_content %}
+                            <h3>Meus Cursos</h3>
+                            {% for enrollment in enrollments %}
+                            <div class="well">
+                                <h4>{{ enrollment.course }}
+                                ({{ enrollment.course.start_date|date:'d/m/y'|default:'Data não informada' }})
+                                </h4>
+                                {{ enrollment.course.description|linebreaks }}
+                                <div class="pure-controls">
+                                    <a href="{% url 'courses:announcements' enrollment.course.slug %}" class="btn btn-primary">Acessar</a>
+                                    <a href="{% url 'courses:undo_enrollment' enrollment.course.slug %}" class="btn btn-danger">Cancelar</a>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <div class="pure-u-1">
+                            <p>Nenhum curso inscrito</p>
+                            </div>
+                            {% endfor %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}

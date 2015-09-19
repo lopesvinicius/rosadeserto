@@ -1,0 +1,8 @@
+ <li class="list-group-item">
+    <b>MEUS CURSOS</b>
+</li>
+{% for enrollment in enrollments %}
+<li class="list-group-item">{{ enrollment.course }}</li>
+{% empty %}
+<li class="list-group-item">Nenhum curso encontrado</li>
+{% endfor %}
